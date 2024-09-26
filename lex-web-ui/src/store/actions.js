@@ -15,13 +15,14 @@ License for the specific language governing permissions and limitations under th
  * Asynchronous store actions
  */
 
-/* eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "info", "warn", "error", "time", "timeEnd"] }] */
 /* eslint spaced-comment: ["error", "always", { "exceptions": ["*"] }] */
 
 import LexAudioRecorder from '@/lib/lex/recorder';
 import initRecorderHandlers from '@/store/recorder-handlers';
 import { chatMode, liveChatStatus } from '@/store/state';
 import { createLiveChatSession, connectLiveChatSession, initLiveChatHandlers, sendChatMessage, sendTypingEvent, requestLiveChatEnd } from '@/store/live-chat-handlers';
+// eslint-disable-next-line import/extensions
 import { initTalkDeskLiveChat, sendTalkDeskChatMessage, requestTalkDeskLiveChatEnd } from '@/store/talkdesk-live-chat-handlers.js';
 import silentOgg from '@/assets/silent.ogg';
 import silentMp3 from '@/assets/silent.mp3';
@@ -104,6 +105,14 @@ export default {
           text: context.state.config.lex.initialText,
         });
     }
+    if (context.state.messages &&
+      context.state.messages.length === 1 &&
+      context.state.config.lex.disclaimer?.alts?.markdown?.length > 0) {
+        context.commit('pushMessage', {
+          type: 'bot',
+          alts: context.state.config.lex.disclaimer.alts,
+        });
+    }
   },
   initLexClient(context, payload) {
     lexClient = new LexClient({
@@ -124,7 +133,7 @@ export default {
     return context.dispatch('getCredentials')
       .then(() => {
         lexClient.initCredentials(awsCredentials)
-        //Enable streaming response
+        // Enable streaming response
         if (String(context.state.config.lex.allowStreamingResponses) === "true") {
           context.dispatch('InitWebSocketConnect')
         }
@@ -721,7 +730,7 @@ export default {
         return lexClient.postText(text, localeId, session);
       })
       .then((data) => {
-        //TODO: Waiting for all wsMessages typing on the chat bubbles
+        // TODO: Waiting for all wsMessages typing on the chat bubbles
         context.commit('setIsStartingTypingWsMessages', false);
         context.commit('setIsLexProcessing', false);
         return context.dispatch('updateLexState', data)
@@ -736,7 +745,7 @@ export default {
           .then(() => Promise.resolve(data));
       })
       .catch((error) => {
-        //TODO: Need to handle if the error occurred
+        // TODO: Need to handle if the error occurred
         context.commit('setIsStartingTypingWsMessages', false);
         context.commit('setIsLexProcessing', false);
         throw error;
@@ -1300,7 +1309,7 @@ export default {
     const s3 = new AWS.S3({
       credentials: awsCredentials
     });
-    //Create a key that is unique to the user & time of upload
+    // Create a key that is unique to the user & time of upload
     const documentKey = lexClient.userId + '/' + file.name.split('.').join('-' + Date.now() + '.')
     const s3Params = {
       Body: file,

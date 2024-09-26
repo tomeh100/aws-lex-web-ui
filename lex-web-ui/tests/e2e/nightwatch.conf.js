@@ -1,4 +1,5 @@
 require('babel-register')
+// eslint-disable-next-line import/extensions
 var config = require('../../config')
 
 // http://nightwatchjs.org/gettingstarted#settings-file

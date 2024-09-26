@@ -30,6 +30,7 @@ export const configBase = {
     iframeOrigin: '',
     iframeSrcPath: '',
   },
+  translations: {}
 };
 
 export default configBase;

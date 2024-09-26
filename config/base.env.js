@@ -41,6 +41,7 @@ module.exports = {
     allowStreamingResponses: (process.env.ALLOW_STREAMING_RESPONSES === undefined) ? undefined : (process.env.ALLOW_STREAMING_RESPONSES === 'true') ? true : false,
     streamingWebSocketEndpoint: process.env.STREAMING_WEB_SOCKET_ENDPOINT,
     streamingDynamoDbTable: process.env.STREAMING_DYNAMO_TABLE,
+    disclaimer: process.env.DISCLAIMER
   },
   ui: {
     parentOrigin: process.env.PARENT_ORIGIN,
@@ -79,4 +80,5 @@ module.exports = {
     iframeOrigin: process.env.IFRAME_ORIGIN,
     shouldLoadIframeMinimized: (process.env.IFRAME_LOAD_MINIMIZED === undefined) ? undefined : (process.env.IFRAME_LOAD_MINIMIZED === 'true') ? true : false,
   },
+  translations: {}
 };

@@ -26,7 +26,12 @@
     "v2BotLocaleId": "",
     "allowStreamingResponses": false,
     "streamingWebSocketEndpoint": "",
-    "streamingDynamoDbTable": ""
+    "streamingDynamoDbTable": "",
+    "disclaimer": {
+      "alts": {
+        "markdown": "<b>Disclaimer</b>"
+      }
+    }
   },
   "ui": {
     "parentOrigin": "http://localhost:8000",
@@ -66,5 +71,43 @@
     "iframeOrigin": "",
     "shouldLoadIframeMinimized": false,
     "iframeSrcPath": "/index.html#/?lexWebUiEmbed=true"
+  },
+  "translations": {
+    "English": {
+      "code": "en_US",
+      "saveChat": {
+        "label": "Save Chat",
+        "tooltip": "Save the current conversation",
+        "ariaLabel": "Save chat"
+      },
+      "language": {
+        "label": "Language",
+        "tooltip": "Change the language",
+        "ariaLabel": "Language"
+      },
+      "endChat": {
+        "label": "End Chat",
+        "tooltip": "End the current conversation",
+        "ariaLabel": "End chat"
+      }
+    },
+    "Spanish": {
+      "code": "es_US",
+      "saveChat": {
+        "label": "Guardar Chat",
+        "tooltip": "Guardar la conversación actual",
+        "ariaLabel": "Guardar chat"
+      },
+      "language": {
+        "label": "Idioma",
+        "tooltip": "Cambiar el idioma",
+        "ariaLabel": "Idioma"
+      },
+      "endChat": {
+        "label": "Finalizar Chat",
+        "tooltip": "Finalizar la conversación actual",
+        "ariaLabel": "Finalizar chat"
+      }
+    }
   }
 }

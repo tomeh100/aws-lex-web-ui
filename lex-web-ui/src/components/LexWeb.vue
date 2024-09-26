@@ -30,6 +30,7 @@
       v-if="!isUiMinimized"
     >
       <v-container
+        v-if="!isLanguagePageActive"
         class="message-list-container"
         :class="`toolbar-height-${toolbarHeightClassSuffix}`"
         fluid pa-0
@@ -141,6 +142,9 @@ export default {
         (window.screen.height < mobileResolution ||
           window.screen.width < mobileResolution)
       );
+    },
+    isLanguagePageActive() {
+      return this.$store.state.isLanguagePageActive;
     },
   },
   watch: {

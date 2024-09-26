@@ -1,6 +1,9 @@
 // For authoring Nightwatch tests, see
 // http://nightwatchjs.org/guide#usage
 
+/* eslint no-console: ["error", { allow: ["log", "info", "warn", "error", "time", "timeEnd"] }] */
+
+
 var config = require('../../../src/config/config.test.json');
 
 module.exports = {

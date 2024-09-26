@@ -44,8 +44,7 @@ if (!envShortName) {
 }
 
 // eslint-disable-next-line import/no-dynamic-require
-const configEnvFile = (process.env.BUILD_TARGET === 'lib') ?
-  {} : await import(`./config.${envShortName}.json`);
+const configEnvFile = (process.env.BUILD_TARGET === 'lib') ? {} : require(`./config.${envShortName}.json`);
 
 // default config used to provide a base structure for
 // environment and dynamic configs
@@ -145,6 +144,7 @@ const configDefault = {
 
     // dynamo DB table for streaming
     streamingDynamoDbTable: '',
+    disclaimer: {}
   },
 
   polly: {
@@ -374,6 +374,7 @@ const configDefault = {
 
   // URL query parameters are put in here at run time
   urlQueryParams: {},
+  translations: {}
 };
 
 /**

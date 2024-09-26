@@ -1,91 +1,137 @@
 <template>
-  <v-toolbar elevation="3" color="white" :dense="this.$store.state.isRunningEmbedded" class="toolbar-content">
-    <!--
-      using v-show instead of v-if to make recorder-status transition work
-    -->
-      <!--
-        using v-show instead of v-if to make recorder-status transition work
-      -->
-      <v-text-field
-        :label="textInputPlaceholder"
-        v-show="shouldShowTextInput"
-        :disabled="isLexProcessing"
-        v-model="textInput"
-        @keyup.enter.stop="postTextMessage"
-        @focus="onTextFieldFocus"
-        @blur="onTextFieldBlur"
-        @update:model-value="onKeyUp"
-        ref="textInput"
-        id="text-input"
-        name="text-input"
-        single-line
-        hide-details
-        density="compact"
-        variant="underlined"
-        class="toolbar-text"
-      >
-    </v-text-field>
+<div>
+    <div v-if="!showLanguagePage">
+      <v-toolbar elevation="3" color="white" :dense="this.$store.state.isRunningEmbedded" class="toolbar-content">
+        <!-- Existing toolbar content -->
+        <v-text-field
+          :label="textInputPlaceholder"
+          v-show="shouldShowTextInput"
+          :disabled="isLexProcessing"
+          v-model="textInput"
+          @keyup.enter.stop="postTextMessage"
+          @focus="onTextFieldFocus"
+          @blur="onTextFieldBlur"
+          @update:model-value="onKeyUp"
+          ref="textInput"
+          id="text-input"
+          name="text-input"
+          single-line
+          hide-details
+          density="compact"
+          variant="underlined"
+          class="toolbar-text"
+        >
+        </v-text-field>
 
-      <recorder-status
-        v-show="!shouldShowTextInput"
-      ></recorder-status>
+        <recorder-status
+          v-show="!shouldShowTextInput"
+        ></recorder-status>
+        
+        <!-- Existing buttons -->
+        <v-btn
+          v-if="shouldShowSendButton"
+          @click="postTextMessage"
+          :disabled="isLexProcessing || isSendButtonDisabled"
+          ref="send"
+          class="icon-color input-button"
+          aria-label="Send Message"
+        >
+          <v-tooltip activator="parent" location="start">
+            <span id="input-button-tooltip">{{ inputButtonTooltip }}</span>
+          </v-tooltip>
+          <v-icon size="x-large">send</v-icon>
+        </v-btn>
+        <v-btn
+          v-if="!shouldShowSendButton && !isModeLiveChat"
+          @click="onMicClick"
+          v-on="tooltipEventHandlers"
+          :disabled="isMicButtonDisabled"
+          ref="mic"
+          class="icon-color input-button"
+          icon
+          :aria-label="micButtonAriaLabel"
+        >
+          <v-tooltip activator="parent" v-model="shouldShowTooltip" location="start">
+            <span id="input-button-tooltip">{{ inputButtonTooltip }}</span>
+          </v-tooltip>
+          <v-icon size="x-large">{{ micButtonIcon }}</v-icon>
+        </v-btn>
+        <v-btn
+          v-if="shouldShowUpload"
+          v-on:click="onPickFile"
+          v-bind:disabled="isLexProcessing"
+          ref="upload"
+          class="icon-color input-button"
+          icon
+          aria-label="Upload File"
+        >
+          <v-icon size="x-large">attach_file</v-icon>
+          <input
+            type="file"
+            style="display: none"
+            ref="fileInput"
+            @change="onFilePicked">
+        </v-btn>
+        <v-btn
+          v-if="shouldShowAttachmentClear"
+          v-on:click="onRemoveAttachments"
+          v-bind:disabled="isLexProcessing"
+          ref="removeAttachments"
+          class="icon-color input-button"
+          icon
+          aria-label="Remove Attachments"
+        >
+          <v-icon size="x-large">clear</v-icon>
+        </v-btn>
+      </v-toolbar>
 
-            <!-- separate tooltip as a workaround to support mobile touch events -->
-    <!-- tooltip should be before btn to avoid right margin issue in mobile -->
-    <v-btn
-      v-if="shouldShowSendButton"
-      @click="postTextMessage"
-      :disabled="isLexProcessing || isSendButtonDisabled"
-      ref="send"
-      class="icon-color input-button"
-      aria-label="Send Message"
-    >
-      <v-tooltip activator="parent" location="start">
-        <span id="input-button-tooltip">{{ inputButtonTooltip }}</span>
-      </v-tooltip>
-      <v-icon size="x-large">send</v-icon>
-    </v-btn>
-    <v-btn
-      v-if="!shouldShowSendButton && !isModeLiveChat"
-      @click="onMicClick"
-      v-on="tooltipEventHandlers"
-      :disabled="isMicButtonDisabled"
-      ref="mic"
-      class="icon-color input-button"
-      icon
-    >
-      <v-tooltip activator="parent" v-model="shouldShowTooltip" location="start">
-        <span id="input-button-tooltip">{{ inputButtonTooltip }}</span>
-      </v-tooltip>
-      <v-icon size="x-large">{{ micButtonIcon }}</v-icon>
-    </v-btn>
-    <v-btn
-      v-if="shouldShowUpload"
-      v-on:click="onPickFile"
-      v-bind:disabled="isLexProcessing"
-      ref="upload"
-      class="icon-color input-button"
-      icon
-    >
-      <v-icon size="x-large">attach_file</v-icon>
-      <input
-        type="file"
-        style="display: none"
-        ref="fileInput"
-        @change="onFilePicked">
-    </v-btn>
-    <v-btn
-      v-if="shouldShowAttachmentClear"
-      v-on:click="onRemoveAttachments"
-      v-bind:disabled="isLexProcessing"
-      ref="removeAttachments"
-      class="icon-color input-button"
-      icon
-    >
-      <v-icon size="x-large">clear</v-icon>
-    </v-btn>
-  </v-toolbar>
-</template>
+      <v-toolbar elevation="3" color="white" class="bottom-toolbar">
+        <v-spacer></v-spacer>
+        <v-btn
+          @click="onSaveChatClick"
+          class="bottom-button"
+          rounded
+          :aria-label="saveChatAriaLabel"
+        >
+        <v-tooltip activator="parent" location="top" :aria-label="saveChatAriaLabel">
+          {{ saveChatTooltip }}
+        </v-tooltip>
+         {{ saveChatLabel }}
+        </v-btn>
+        <v-btn
+          @click="onLanguageClick"
+          class="bottom-button"
+          :aria-label="languageAriaLabel"
+          rounded
+        >
+        <v-tooltip activator="parent" location="top" :aria-label="languageAriaLabel">
+          {{ languageTooltip }}
+        </v-tooltip>
+        {{ languageLabel }}
+        </v-btn>
+        <v-btn
+          @click="onEndChatClick"
+          class="bottom-button"
+          rounded
+          :aria-label="endChatAriaLabel"
+        >
+        <v-tooltip activator="parent" location="top" :aria-label="endChatAriaLabel">
+          {{ endChatTooltip }}
+        </v-tooltip>
+        {{ endChatLabel }}
+        </v-btn>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+    </div>
+
+    <!-- Add LanguagePage component -->
+    <language-page 
+      v-if="showLanguagePage" 
+      @back="onLanguageClose"
+      @language-changed="onLanguageChanged"
+    />
+  </div>
+  </template>
 
 <script>
 /*
@@ -103,6 +149,7 @@ License for the specific language governing permissions and limitations under th
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 import RecorderStatus from '@/components/RecorderStatus';
+import LanguagePage from '@/components/LanguagePage';
 
 export default {
   name: 'input-container',
@@ -112,6 +159,7 @@ export default {
       isTextFieldFocused: false,
       shouldShowTooltip: false,
       shouldShowAttachmentClear: false,
+      showLanguagePage: false,
       // workaround: vuetify tooltips doesn't seem to support touch events
       tooltipEventHandlers: {
         mouseenter: this.onInputButtonHoverEnter,
@@ -125,6 +173,7 @@ export default {
   props: ['textInputPlaceholder', 'initialSpeechInstruction'],
   components: {
     RecorderStatus,
+    LanguagePage,
   },
   computed: {
     isBotSpeaking() {
@@ -163,6 +212,15 @@ export default {
       }
       return 'mic';
     },
+    micButtonAriaLabel() {
+      if (this.isMicMuted) {
+        return 'Microphone is muted';
+      }
+      if (this.isBotSpeaking || this.isSpeechConversationGoing) {
+        return 'Stop voice input';
+      }
+      return 'Start voice input';
+    },
     inputButtonTooltip() {
       if (this.shouldShowSendButton) {
         return 'send';
@@ -190,6 +248,42 @@ export default {
         (this.$store.state.isLoggedIn && this.$store.state.config.ui.uploadRequireLogin && this.$store.state.config.ui.enableUpload) ||
         (!this.$store.state.config.ui.uploadRequireLogin && this.$store.state.config.ui.enableUpload)
       )
+    },
+    shouldShowEndChatButton() {
+      return !(this.isBotSpeaking && this.isSpeechConversationGoing) && this.$store.state.messages.length > 0
+    },
+    currentLanguage() {
+      return this.$store.state.currentLanguage || 'English';
+    },
+    translations() {
+      return this.$store.state.config.translations || {};
+    },
+    saveChatLabel() {
+      return this.translations[this.currentLanguage]?.saveChat?.label || 'Save Chat';
+    },
+    saveChatTooltip() {
+      return this.translations[this.currentLanguage]?.saveChat?.tooltip || 'Save the current conversation';
+    },
+    saveChatAriaLabel() {
+      return this.translations[this.currentLanguage]?.saveChat?.ariaLabel || 'Save chat';
+    },
+    languageLabel() {
+      return this.translations[this.currentLanguage]?.language?.label || 'Language';
+    },
+    languageTooltip() {
+      return this.translations[this.currentLanguage]?.language?.tooltip || 'Change the language';
+    },
+    languageAriaLabel() {
+      return this.translations[this.currentLanguage]?.language?.ariaLabel || 'Language';
+    },
+    endChatLabel() {
+      return this.translations[this.currentLanguage]?.endChat?.label || 'End Chat';
+    },
+    endChatTooltip() {
+      return this.translations[this.currentLanguage]?.endChat?.tooltip || 'End the current conversation';
+    },
+    endChatAriaLabel() {
+      return this.translations[this.currentLanguage]?.endChat?.ariaLabel || 'End chat';
     },
   },
   methods: {
@@ -350,9 +444,39 @@ export default {
       delete this.$store.state.lex.sessionAttributes.userFilesUploaded;
       this.shouldShowAttachmentClear = false;
     },
+    messageForEndChatContent() {
+      return({
+        text: "End Chat",
+        type: 'human',
+      })
+    }, 
+    onEndChatClick() {
+      this.$store.dispatch('postTextMessage', this.messageForEndChatContent());
+    },
+    onSaveChatClick() {
+      // Implement save chat functionality
+      console.log('Save Chat clicked');
+    },
+    onLanguageClick() {
+      this.showLanguagePage = true;
+    },
+    onLanguageClose() {
+      this.showLanguagePage = false;
+    },
+    onLanguageChanged() {
+      console.log('Language changed to:', this.currentLanguage);
+      this.$store.dispatch('postTextMessage', this.messageForChangeLanguage(this.currentLanguage))
+    },
+    messageForChangeLanguage(language) {
+      return({
+        text: language,
+        type: 'human',
+      })
+    },
   },
 };
 </script>
+
 <style>
 .input-container {
   /* make footer same height as dense toolbar */
@@ -375,4 +499,15 @@ export default {
   margin-bottom: 10px;
 }
 
+.bottom-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 0;
+}
+
+.bottom-button {
+  margin: 0 8px;
+}
 </style>

@@ -86,16 +86,6 @@
             {{ toolbarEndLiveChatLabel }}
           </v-list-item-title>
         </v-list-item>
-        <v-list-item
-          v-if="isLocaleSelectable"
-          :disabled="restrictLocaleChanges"
-        >
-          <v-list-item v-for="(locale, index) in locales" :key="index">
-            <v-list-item-title @click="setLocale(locale)">
-              {{ locale }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list-item>
       </v-list>
     </v-menu>
 
@@ -576,8 +566,6 @@ export default {
   margin-left: 5px;
 }
 
-.hangup-text {
-}
 
 .end-live-chat-btn {
   width: unset !important;

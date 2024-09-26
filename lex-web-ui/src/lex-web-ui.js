@@ -20,6 +20,8 @@ License for the specific language governing permissions and limitations under th
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies
+import { createAppDev } from 'vue/dist/vue.esm-bundler.js';
 import { Config as AWSConfig, CognitoIdentityCredentials }
   from 'aws-sdk/global';
 import LexRuntime from 'aws-sdk/clients/lexruntime';
@@ -31,15 +33,14 @@ import VuexStore from '@/store';
 
 import { config as defaultConfig, mergeConfig } from '@/config';
 import { createApp, defineAsyncComponent } from 'vue';
-import { createAppDev } from 'vue/dist/vue.esm-bundler.js';
 import { aliases, md } from 'vuetify/iconsets/md';
 import { createStore } from 'vuex';
-
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies
 import colors from 'vuetify/lib/util/colors'
 
 const defineAsyncComponentInstance = (window.Vue) ? window.Vue.defineAsyncComponent : defineAsyncComponent;

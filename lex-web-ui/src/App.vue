@@ -1,10 +1,10 @@
 <script setup>
-import LexWeb from './components/LexWeb.vue'
+import LexWeb from '@/components/LexWeb'
 </script>
 
 <template>
   <div id="lex-app">
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 

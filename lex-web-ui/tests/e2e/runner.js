@@ -1,8 +1,9 @@
 // 1. start the dev server using production config
 var server;
 process.env.NODE_ENV = 'testing';
-
+/* eslint import/extensions: "off" */
 // lex-web-ui: added ability to test using running web server
+
 var config = require('../../config')
 var devServerPort = config.dev.port;
 var devServerPath = config.dev.assetsPublicPath;

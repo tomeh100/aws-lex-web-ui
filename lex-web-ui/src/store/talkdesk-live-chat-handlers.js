@@ -15,7 +15,7 @@
  * Vuex store recorder handlers
  */
 
-/* eslint no-console: ["error", { allow: ["info", "warn", "error", "time", "timeEnd"] }] */
+/* eslint no-console: ["error", { allow: ["log", "info", "warn", "error", "time", "timeEnd"] }] */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { liveChatStatus } from '@/store/state';
 

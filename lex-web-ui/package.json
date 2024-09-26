@@ -13,9 +13,14 @@
     "build": "vue-cli-service build --skip-plugins @vue/cli-plugin-eslint",
     "build:dev": "vue-cli-service build --mode development",
     "build-dist": "npm run build:lib-dev && npm run build:lib-prod",
-    "build:lib-dev": "BUILD_TARGET=lib vue-cli-service build --skip-plugins @vue/cli-plugin-eslint ---no-clean --mode development src/lex-web-ui.js",
-    "build:lib-prod": "BUILD_TARGET=lib vue-cli-service build --skip-plugins @vue/cli-plugin-eslint --no-clean ---mode production src/lex-web-ui.js",
-    "lint": "vue-cli-service lint"
+    "build:lib-dev": "cross-env BUILD_TARGET=lib vue-cli-service build --skip-plugins @vue/cli-plugin-eslint ---no-clean --mode development src/lex-web-ui.js",
+    "build:lib-prod": "cross-env BUILD_TARGET=lib vue-cli-service build --skip-plugins @vue/cli-plugin-eslint --no-clean ---mode production src/lex-web-ui.js",
+    "lint": "cross-env vue-cli-service lint --no-fix",
+    "lint:fix": "cross-env vue-cli-service lint --fix",
+    "lint:prod": "cross-env NODE_ENV=production vue-cli-service lint --no-fix",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "amazon-connect-chatjs": "^2.3.0",
@@ -23,6 +28,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "core-js": "^3.6.5",
+    "cross-spawn": "^7.0.3",
     "jwt-decode": "^4.0.0",
     "marked": "^4.0.12",
     "material-design-icons": "^3.0.1",
@@ -32,27 +38,42 @@
     "vue": "^3.3.10",
     "vue-loader": "^17.3.1",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.4.6",
+    "vuetify": "^3.7.2",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.23.3",
+    "@babel/preset-env": "^7.25.4",
     "@mdi/font": "^7.4.47",
     "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-e2e-nightwatch": "~5.0.0",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "^5.0.8",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
+    "babel-jest": "^27.0.6",
+    "chromedriver": "129",
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
     "eslint": "^8.55.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^9.19.2",
+    "jest": "^27.0.5",
+    "jest-axe": "^9.0.0",
+    "jest-environment-jsdom": "^27.0.5",
+    "jest-transform-stub": "^2.0.0",
+    "material-design-icons-iconfont": "^6.7.0",
+    "postcss-import": "^16.1.0",
+    "postcss-preset-env": "^10.0.5",
     "worker-loader": "^3.0.8"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=10.0.0"
-  },
-  "overrides": {
-    "postcss": "8.4.32"
   }
 }

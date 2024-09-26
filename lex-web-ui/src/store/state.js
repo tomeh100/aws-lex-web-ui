@@ -114,5 +114,8 @@ export default {
     wsMessagesCurrentIndex:0,
     wsMessagesString:'',
     isStartingTypingWsMessages:true
-  }
+  },
+
+  isLanguagePageActive: false, // New state to track if the language page is active
+  translations: {}
 };

@@ -8,32 +8,55 @@
     "aws_cognito_region": "us-east-1",
     "region": "us-east-1"
   },
+  "connect": {
+    "contactFlowId": "",
+    "instanceId": "",
+    "apiGatewayEndpoint": "",
+    "promptForNameMessage": "Before starting a live chat, please tell me your name?",
+    "waitingForAgentMessage": "Thanks for waiting. An agent will be with you when available.",
+    "waitingForAgentMessageIntervalSeconds": "60",
+    "agentJoinedMessage": "{Agent} has joined.",
+    "agentLeftMessage": "{Agent} has left.",
+    "chatEndedMessage": "Chat ended.",
+    "attachChatTranscript": "false",
+    "liveChatTerms": "live chat",
+    "transcriptMessageDelayInMsec": "150"
+  },
   "lex": {
     "v2BotId": "",
     "v2BotAliasId": "",
-    "v2BotLocaleId": "",
-    "botName": "",
+    "v2BotLocaleId": "en_US,es_US",
+    "botName": "OrderFlowers",
     "botAlias": "$LATEST",
-    "initialText": "Type 'Buy Flowers' to get started.",
+    "initialText": "You can ask me for help ordering flowers. Just type \"Buy flowers\" or click on the mic and say it.",
     "initialSpeechInstruction": "Say 'Buy Flowers' to get started.",
     "initialUtterance": "",
     "reInitSessionAttributesOnRestart": false,
     "region": "us-east-1",
     "retryOnLexPostTextTimeout": "false",
-    "retryCountPostTextTimeout": "1"
+    "retryCountPostTextTimeout": "1",
+    "allowStreamingResponses": false,
+    "streamingWebSocketEndpoint": "",
+    "streamingDynamoDbTable": "",
+    "disclaimer": {
+      "alts": {
+        "markdown": "<b>Disclaimer</b>"
+      }
+    }
   },
   "ui": {
-    "parentOrigin": "",
+    "parentOrigin": "http://localhost:8000",
     "toolbarTitle": "Order Flowers",
     "toolbarLogo": "",
     "positiveFeedbackIntent": "Thumbs up",
     "negativeFeedbackIntent": "Thumbs down",
     "helpIntent": "Help",
+    "helpContent": {},
     "enableLogin": false,
+    "enableSFX": false,
     "forceLogin": false,
     "AllowSuperDangerousHTMLInMessage": true,
     "shouldDisplayResponseCardTitle": false,
-    "saveHistory": false,
     "minButtonContent": "",
     "hideInputFieldsForButtonResponse": false,
     "pushInitialTextOnRestart": false,
@@ -42,28 +65,55 @@
     "backButton": false,
     "messageMenu": true,
     "hideButtonMessageBubble": false,
-    "enableLiveChat": false
-  },
-  "connect": {
-    "contactFlowId" : "",
-    "instanceId" : "",
-    "apiGatewayEndpoint" : "",
-    "waitingForAgentMessage": "Thanks for waiting. An agent will be with you when available.",
-    "waitingForAgentMessageIntervalSeconds": 60,
-    "agentJoinedMessage": "{Agent} has joined.",
-    "agentLeftMessage": "{Agent} has left.", 
-    "chatEndedMessage": "Chat ended.",
-    "attachChatTranscript": true
-  },
-  "polly": {
-    "voiceId": "Salli"
-  },
-  "recorder": {
-    "preset": "speech_recognition"
+    "saveHistory": false,
+    "enableLiveChat": false,
+    "toolbarStartLiveChatLabel": "Start Live Chat",
+    "toolbarEndLiveChatLabel": "End Live Chat",
+    "toolbarStartLiveChatIcon": "people_alt",
+    "toolbarEndLiveChatIcon": "call_end",
+    "minButtonToolTipContent": "My Chatbot"
   },
   "iframe": {
     "iframeOrigin": "",
     "shouldLoadIframeMinimized": false,
     "iframeSrcPath": "/index.html#/?lexWebUiEmbed=true"
+  },
+  "translations": {
+    "English": {
+      "code": "en_US",
+      "saveChat": {
+        "label": "Save Chat",
+        "tooltip": "Save the current conversation",
+        "ariaLabel": "Save chat"
+      },
+      "language": {
+        "label": "Language",
+        "tooltip": "Change the language",
+        "ariaLabel": "Language"
+      },
+      "endChat": {
+        "label": "End Chat",
+        "tooltip": "End the current conversation",
+        "ariaLabel": "End chat"
+      }
+    },
+    "Spanish": {
+      "code": "es_US",
+      "saveChat": {
+        "label": "Guardar Chat",
+        "tooltip": "Guardar la conversación actual",
+        "ariaLabel": "Guardar chat"
+      },
+      "language": {
+        "label": "Idioma",
+        "tooltip": "Cambiar el idioma",
+        "ariaLabel": "Idioma"
+      },
+      "endChat": {
+        "label": "Finalizar Chat",
+        "tooltip": "Finalizar la conversación actual",
+        "ariaLabel": "Finalizar chat"
+      }
+    }
   }
 }

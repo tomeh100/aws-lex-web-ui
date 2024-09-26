@@ -17,13 +17,13 @@ License for the specific language governing permissions and limitations under th
 
 /* eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
 /* eslint no-param-reassign: ["error", { "props": false }] */
-/* eslint spaced-comment: ["error", "always", { "exceptions": ["*"] }] */
+/* eslint spaced-comment: ["error", { "exceptions": ["*"] }] */
 
 import { mergeConfig } from '@/config';
 import { chatMode, liveChatStatus } from '@/store/state';
 
 export default {
-  /**
+/**
    * state mutations
    */
   // Checks whether a state object exists in sessionStorage and sets the states
@@ -220,6 +220,7 @@ export default {
     try {
       const setPath = (object, path, value) => path
         .split('.')
+        // eslint-disable-next-line no-param-reassign
         .reduce((o, p, i) => o[p] = path.split('.').length === ++i ? value : o[p] || {}, object);
 
       setPath(state.lex.sessionAttributes, data.key, data.value);
@@ -554,12 +555,12 @@ export default {
     state.botAudio.isVoiceOutput = bool;
   },
 
-//Push WS Message to streamingMessage[]
+// Push WS Message to streamingMessage[]
 pushWebSocketMessage(state, wsMessages){
   state.streaming.wsMessages.push(wsMessages);
 },
 
-//Append wsMessage to wsMessageString in MessageLoading.vue
+// Append wsMessage to wsMessageString in MessageLoading.vue
 typingWsMessages(state){
   if(state.streaming.isStartingTypingWsMessages){
     state.streaming.wsMessagesString = state.streaming.wsMessagesString.concat(state.streaming.wsMessages[state.streaming.wsMessagesCurrentIndex]);
@@ -567,7 +568,7 @@ typingWsMessages(state){
 
   }else if (state.streaming.isStartingTypingWsMessages){
     state.streaming.isStartingTypingWsMessages = false;
-    //reset wsMessage to default
+    // reset wsMessage to default
     state.streaming.wsMessagesString = '';
     state.streaming.wsMessages=[];
     state.streaming.wsMessagesCurrentIndex=0;
@@ -577,10 +578,29 @@ typingWsMessages(state){
 setIsStartingTypingWsMessages(state, bool){
   state.streaming.isStartingTypingWsMessages = bool;
   if(!bool){
-    //reset wsMessage to default
+    // reset wsMessage to default
     state.streaming.wsMessagesString = '';
     state.streaming.wsMessages=[];
     state.streaming.wsMessagesCurrentIndex=0;
   }
 }, 
+
+  /**
+   * Set the isLanguagePageActive state
+   */
+  setIsLanguagePageActive(state, bool) {
+    if (typeof bool !== 'boolean') {
+      console.error('setIsLanguagePageActive status not boolean', bool);
+      return;
+    }
+    state.isLanguagePageActive = bool;
+  },
+  setCurrentLanguage(state, language) {
+    if (typeof language !== 'string') {
+      console.error('setCurrentLanguage language is not a string', language);
+      return;
+    }
+    state.currentLanguage = language;
+    localStorage.setItem('selectedLanguage', language);
+  },
 };

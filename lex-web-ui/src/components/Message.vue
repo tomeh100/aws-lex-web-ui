@@ -28,7 +28,11 @@
                 <message-text
                   :message="message"
                   v-if="'text' in message && message.text !== null && message.text.length && !shouldDisplayInteractiveMessage"
-                ></message-text>                
+                ></message-text>
+                <message-text
+                  :message="message"
+                  v-else-if="'alts' in message && message.alts !== null && message.alts.markdown.length && !shouldDisplayInteractiveMessage"
+                ></message-text>              
                 <div
                   v-if="shouldDisplayInteractiveMessage && interactiveMessage?.templateType == 'ListPicker'">
                   <v-card-title primary-title>
