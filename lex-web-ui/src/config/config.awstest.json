@@ -1,0 +1,74 @@
+{
+  "cognito": {
+    "poolId": "",
+    "appUserPoolClientId": "",
+    "appUserPoolName": "",
+    "appDomainName": "",
+    "appUserPoolIdentityProvider": ""
+  },
+  "connect": {
+    "contactFlowId": "",
+    "instanceId": "",
+    "apiGatewayEndpoint": ""
+  },
+  "lex": {
+    "botName": "QnABot_BotuU",
+    "initialText": "This is from AWS TEST CONFING",
+    "initialSpeechInstruction": "Say 'Order Flowers' to get started.",
+    "initialUtterance": "",
+    "disclaimer": {
+      "alts": {
+        "markdown": "<b>Disclaimer</b>"
+      }
+    }
+  },
+  "polly": {
+    "voiceId": "Salli"
+  },
+  "ui": {
+    "parentOrigin": "",
+    "pageTitle": "AWS TEST",
+    "toolbarTitle": "AWS TEST BOT"
+  },
+  "recorder": {
+    "preset": "speech_recognition"
+  },
+  "translations": {
+    "English": {
+      "code": "en_US",
+      "saveChat": {
+        "label": "Save Chat",
+        "tooltip": "Save the current conversation",
+        "ariaLabel": "Save chat"
+      },
+      "language": {
+        "label": "Language",
+        "tooltip": "Change the language",
+        "ariaLabel": "Language"
+      },
+      "endChat": {
+        "label": "End Chat",
+        "tooltip": "End the current conversation",
+        "ariaLabel": "End chat"
+      }
+    },
+    "Spanish": {
+      "code": "es_US",
+      "saveChat": {
+        "label": "Guardar Chat",
+        "tooltip": "Guardar la conversación actual",
+        "ariaLabel": "Guardar chat"
+      },
+      "language": {
+        "label": "Idioma",
+        "tooltip": "Cambiar el idioma",
+        "ariaLabel": "Idioma"
+      },
+      "endChat": {
+        "label": "Finalizar Chat",
+        "tooltip": "Finalizar la conversación actual",
+        "ariaLabel": "Finalizar chat"
+      }
+    }
+  }
+}
