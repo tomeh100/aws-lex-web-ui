@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" max-width="100%" fullscreen>
       <v-card>
-        <v-toolbar :color="toolbarColor">
+        <v-toolbar elevation="3" :color="toolbarColor">
           <v-btn icon @click="close">
             <v-icon>arrow_back_bold</v-icon>
           </v-btn>
@@ -32,7 +32,7 @@
               class="view-disclaimer"
               href="#"
               @click.prevent="openFullDisclaimer"
-              >View disclaimer
+              >View disclaimer.
             </a>
           </v-card-text>
         </v-card-actions>
@@ -40,7 +40,7 @@
     </v-dialog>
     <v-dialog v-model="fullDisclaimerDialog" max-width="100%" fullscreen>
       <v-card>
-        <v-toolbar :color="toolbarColor">
+        <v-toolbar elevation="3" :color="toolbarColor">
           <v-btn icon @click="closeFullDisclaimer">
             <v-icon>arrow_back_bold</v-icon>
           </v-btn>
