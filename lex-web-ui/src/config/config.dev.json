@@ -23,9 +23,9 @@
     "transcriptMessageDelayInMsec": "150"
   },
   "lex": {
-    "v2BotId": "",
-    "v2BotAliasId": "",
-    "v2BotLocaleId": "en_US,es_US",
+    "v2BotId": "R3OCYZKBQD",
+    "v2BotAliasId": "SXVKJD9ZHY",
+    "v2BotLocaleId": "en_US,es_US,fr_CA",
     "botName": "OrderFlowers",
     "botAlias": "$LATEST",
     "initialText": "You can ask me for help ordering flowers. Just type \"Buy flowers\" or click on the mic and say it.",
@@ -50,7 +50,7 @@
     "toolbarLogo": "",
     "positiveFeedbackIntent": "Thumbs up",
     "negativeFeedbackIntent": "Thumbs down",
-    "helpIntent": "Help",
+    "helpIntent": "",
     "helpContent": {},
     "enableLogin": false,
     "enableSFX": false,
@@ -71,7 +71,17 @@
     "toolbarEndLiveChatLabel": "End Live Chat",
     "toolbarStartLiveChatIcon": "people_alt",
     "toolbarEndLiveChatIcon": "call_end",
-    "minButtonToolTipContent": "My Chatbot"
+    "minButtonToolTipContent": "",
+    "endChatIcon": "",
+    "saveTranscriptIcon": "",
+    "saveChatEnabled": true,
+    "endChatEnabled": true,
+    "bottomToolbarEnabled": false,
+    "minimizeIcon": "close",
+    "languageDisclaimer": {
+      "content": "Please select your preferred language for the chat interface. By choosing a language, you acknowledge that translations may not be entirely accurate and that important information should be verified in your native language. For more information about language support and translation accuracy",
+      "fullContent": "<h2>Full Language Disclaimer</h2><p>This chat interface provides translations to multiple languages to assist users in communicating more effectively. However, please be aware of the following:</p><ul><li>Translations are generated automatically and may not always be 100% accurate.</li><li>Complex or idiomatic expressions may not translate well.</li><li>Technical or specialized terminology might not be correctly translated in all languages.</li><li>The context of a conversation can sometimes be lost in translation.</li></ul><p>For critical information or important decisions, we strongly recommend verifying the information in your native language or seeking assistance from a professional translator.</p><p>By using the translation feature, you acknowledge and accept these limitations. Our organization is not responsible for any misunderstandings or consequences resulting from inaccurate translations.</p><p>If you have any questions or concerns about the translation feature, please contact our support team.</p>"
+    }
   },
   "iframe": {
     "iframeOrigin": "",
@@ -80,11 +90,12 @@
   },
   "translations": {
     "English": {
+      "translatedName": "English",
       "code": "en_US",
       "saveChat": {
         "label": "Save Chat",
         "tooltip": "Save the current conversation",
-        "ariaLabel": "Save chat"
+        "ariaLabel": "Save Chat"
       },
       "language": {
         "label": "Language",
@@ -92,12 +103,14 @@
         "ariaLabel": "Language"
       },
       "endChat": {
-        "label": "End Chat",
+        "label": "End chat",
         "tooltip": "End the current conversation",
-        "ariaLabel": "End chat"
+        "ariaLabel": "End chat",
+        "messageContent": "End chat"
       }
     },
     "Spanish": {
+      "translatedName": "Español",
       "code": "es_US",
       "saveChat": {
         "label": "Guardar Chat",
@@ -112,7 +125,8 @@
       "endChat": {
         "label": "Finalizar Chat",
         "tooltip": "Finalizar la conversación actual",
-        "ariaLabel": "Finalizar chat"
+        "ariaLabel": "Finalizar chat",
+        "messageContent": "Finalizar Chat"
       }
     }
   }

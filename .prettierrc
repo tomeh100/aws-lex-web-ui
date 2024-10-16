@@ -1,0 +1,7 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "vueIndentScriptAndStyle": true,
+  "printWidth": 80, 
+  "wrapAttributes": "force-aligned"
+}

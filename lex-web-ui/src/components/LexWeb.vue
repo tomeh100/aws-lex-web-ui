@@ -2,7 +2,7 @@
   <v-app id="lex-web"
     v-bind:ui-minimized="isUiMinimized"
   >
-    <min-button
+  <min-button
       :toolbar-color="toolbarColor"
       :is-ui-minimized="isUiMinimized"
       @toggleMinimizeUi="toggleMinimizeUi"
@@ -17,15 +17,17 @@
       :toolbarStartLiveChatIcon="toolbarStartLiveChatIcon"
       :toolbarEndLiveChatLabel="toolbarEndLiveChatLabel"
       :toolbarEndLiveChatIcon="toolbarEndLiveChatIcon"
+      :saveTranscriptIcon="saveTranscriptIcon"
+      :endChatIcon="endChatIcon"
       :is-ui-minimized="isUiMinimized"
       @toggleMinimizeUi="toggleMinimizeUi"
       @requestLogin="handleRequestLogin"
       @requestLogout="handleRequestLogout"
       @requestLiveChat="handleRequestLiveChat"
       @endLiveChat="handleEndLiveChat"
+      @saveChat="handleSaveChat"
       transition="fade-transition"
     />
-
     <v-main
       v-if="!isUiMinimized"
     >
@@ -146,6 +148,12 @@ export default {
     isLanguagePageActive() {
       return this.$store.state.isLanguagePageActive;
     },
+    saveTranscriptIcon() {
+      return this.$store.state.config.ui.saveTranscriptIcon || 'save';
+    },
+    endChatIcon() {
+      return this.$store.state.config.ui.endChatIcon || 'exit_to_app';
+    }
   },
   watch: {
     // emit lex state on changes
@@ -549,6 +557,10 @@ export default {
         this.$refs.InputContainer.setInputTextFieldFocus();
       }
     },
+    handleSaveChat() {
+      console.info('Save Chat requested');
+      this.$store.dispatch('saveChat');
+    },
   },
 };
 </script>
@@ -594,3 +606,6 @@ NOTE: not using var() for different heights due to IE11 compatibility
 html { font-size: 14px !important; } 
 
 </style>
+
+
+

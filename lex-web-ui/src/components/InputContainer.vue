@@ -85,7 +85,7 @@
         </v-btn>
       </v-toolbar>
 
-      <v-toolbar elevation="3" color="white" class="bottom-toolbar">
+      <v-toolbar v-if="shouldShowBottomToolbar" elevation="3" color="white" class="bottom-toolbar">
         <v-spacer></v-spacer>
         <v-btn
           @click="onSaveChatClick"
@@ -285,6 +285,9 @@ export default {
     endChatAriaLabel() {
       return this.translations[this.currentLanguage]?.endChat?.ariaLabel || 'End chat';
     },
+    shouldShowBottomToolbar(){
+      return this.$store.state.config.ui.bottomToolbarEnabled || false;
+    }
   },
   methods: {
     onInputButtonHoverEnter() {
