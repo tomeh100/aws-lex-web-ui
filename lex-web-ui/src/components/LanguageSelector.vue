@@ -27,13 +27,14 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-card-text>
-          {{ languageDisclaimer }}
-          <a class="view-disclaimer"
-            href="#"
-            @click.prevent="openFullDisclaimer"
-            >View disclaimer
-          </a>
-        </v-card-text>
+            {{ languageDisclaimer }}
+            <a
+              class="view-disclaimer"
+              href="#"
+              @click.prevent="openFullDisclaimer"
+              >View disclaimer
+            </a>
+          </v-card-text>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -60,10 +61,7 @@
 <script>
   export default {
     name: 'LanguageSelector',
-    props: [
-      'modelValue',
-      'toolbarColor'
-    ],
+    props: ['modelValue', 'toolbarColor'],
     emits: ['update:modelValue', 'language-changed'],
     data() {
       return {
